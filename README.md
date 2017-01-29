@@ -2,6 +2,14 @@
 
 A Webpack-powered boilerplate for creating WebVR scenes using A-Frame.
 
+## Installation
+
+Install dependencies:
+
+```
+npm install
+```
+
 ## Local Development
 
 To serve the site from `webpack-dev-server`:
