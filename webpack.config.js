@@ -70,8 +70,6 @@ module.exports = {
       quiet: true
     }),
 
-    // new HtmlWebpackPlugin(),
-
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: 2,
