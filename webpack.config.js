@@ -3,41 +3,36 @@ const path = require('path');
 const resolve = require('path').resolve;
 const src = resolve(__dirname, 'src');
 const build = resolve(__dirname, 'build');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
   entry: {
     app: './src/index.js',
-    index: './index.html'
   },
 
   output: {
     path: build,
     filename: '[name].bundle.js',
-    publicPath: '/build/'
   },
 
   module: {
     rules: [
       {
-        test: /\.js[x]?$/,
+        test: /\.js$/,
         enforce: 'pre',
         loader: 'eslint-loader',
         options: {
           configFile: './.eslintrc',
         },
         include: [src],
-        exclude: [/node_modules/]
+        exclude: /node_modules/,
       },
       {
-        test: /\.js[x]?$/,
+        test: /\.js$/,
         loader: 'babel-loader',
         include: [src],
-        exclude: [/node_modules/]
-      },
-      {
-        test: /\.html$/,
-        loader: 'raw-loader'
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
@@ -88,6 +83,13 @@ module.exports = {
       },
       sourceMap: false
     }),
+
+    new CopyWebpackPlugin([
+      { 
+        from: 'src/index.html', 
+        to: 'index.html' 
+      },
+    ]),
 
     new OpenBrowserPlugin({
       url: 'http://localhost:3000/'
